@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin İdarəetmə Paneli — TechStore</title>
+  <link rel="stylesheet" href="admin.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230D7C3E'><path d='M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-2z'/></svg>">
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside class="admin-sidebar">
+    <div class="sidebar-header">
+      <a href="index.html" class="sidebar-brand">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-2z"></path>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <path d="M16 10a4 4 0 0 1-8 0"></path>
+        </svg>
+        <div>Tech<span>Store</span></div>
+      </a>
+    </div>
+
+    <ul class="sidebar-menu">
+      <li>
+        <button class="menu-item-btn active" data-tab="dashboard">
+          <span>📊</span>
+          <span>İdarəetmə Paneli</span>
+        </button>
+      </li>
+      <li>
+        <button class="menu-item-btn" data-tab="products">
+          <span>📦</span>
+          <span>Məhsullar</span>
+        </button>
+      </li>
+      <li>
+        <button class="menu-item-btn" data-tab="categories">
+          <span>📁</span>
+          <span>Kateqoriyalar</span>
+        </button>
+      </li>
+      <li>
+        <button class="menu-item-btn" data-tab="orders">
+          <span>🛒</span>
+          <span>Sifarişlər</span>
+        </button>
+      </li>
+      <li>
+        <button class="menu-item-btn" data-tab="banners">
+          <span>🖼️</span>
+          <span>Hero Bannerlər</span>
+        </button>
+      </li>
+      <li>
+        <button class="menu-item-btn" data-tab="discounts">
+          <span>🏷️</span>
+          <span>Endirim və Kuponlar</span>
+        </button>
+      </li>
+    </ul>
+
+    <div class="sidebar-footer">
+      <a href="../index.html" class="return-store-link">
+        <span>←</span>
+        <span>Mağazaya qayıt</span>
+      </a>
+      <button onclick="resetAllDataConfirm()" class="btn-admin-secondary" style="font-size: 0.8rem; justify-content: center; background: rgba(255,255,255,0.06); color: #CBD5E1; border-color: rgba(255,255,255,0.1);">
+        🔄 Məlumatları sıfırla
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main Workspace -->
+  <main class="admin-main">
+    
+    <!-- Topbar -->
+    <header class="admin-topbar">
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <button class="admin-mobile-toggle" aria-label="Menyu">☰</button>
+        <h1 class="topbar-title" id="admin-page-title">İdarəetmə Paneli</h1>
+      </div>
+
+      <div class="topbar-actions">
+        <button class="btn-admin-primary" onclick="openAddProductModal()">
+          <span>➕</span>
+          <span>Yeni Məhsul</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Content Workspace -->
+    <div class="admin-content">
+
+      <!-- ==================================================================
+           TAB 1: DASHBOARD
+           ================================================================== -->
+      <section class="tab-pane active" id="tab-dashboard">
+        <!-- Stats -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon" style="background: #EAF7EE; color: #0D7C3E;">💰</div>
+            <div class="stat-info">
+              <h5>Ümumi Gəlir</h5>
+              <h3 id="stat-revenue-total">0,00 ₼</h3>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon" style="background: #E0F2FE; color: #0284C7;">📦</div>
+            <div class="stat-info">
+              <h5>Məhsul Sayı</h5>
+              <h3 id="stat-products-count">0</h3>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon" style="background: #FEF3C7; color: #D97706;">⏳</div>
+            <div class="stat-info">
+              <h5>Gözləyən Sifarişlər</h5>
+              <h3 id="stat-pending-count">0</h3>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon" style="background: #F3E8FF; color: #9333EA;">🛒</div>
+            <div class="stat-info">
+              <h5>Ümumi Sifarişlər</h5>
+              <h3 id="stat-orders-count">0</h3>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Orders -->
+        <div class="table-card">
+          <div class="table-header-box">
+            <h3 style="font-size: 1.1rem; font-weight: 700;">Son Sifarişlər</h3>
+            <button class="btn-admin-secondary" onclick="switchTab('orders')">Bütün Sifarişlər →</button>
+          </div>
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Sifariş ID</th>
+                <th>Müştəri</th>
+                <th>Tarix</th>
+                <th>Məbləğ</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="dashboard-recent-orders">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           TAB 2: PRODUCTS
+           ================================================================== -->
+      <section class="tab-pane" id="tab-products">
+        <div class="table-card">
+          <div class="table-header-box">
+            <input type="text" id="product-search-input" class="admin-form-control" style="max-width: 280px;" placeholder="Məhsul adı və ya kateqoriya ilə axtar..." oninput="renderAdminProducts()">
+            <button class="btn-admin-primary" onclick="openAddProductModal()">➕ Yeni Məhsul Əlavə Et</button>
+          </div>
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Şəkil</th>
+                <th>Məhsulun Adı</th>
+                <th>Kateqoriya</th>
+                <th>Qiymət</th>
+                <th>Stok</th>
+                <th>Əməliyyatlar</th>
+              </tr>
+            </thead>
+            <tbody id="admin-products-table">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           TAB 3: CATEGORIES
+           ================================================================== -->
+      <section class="tab-pane" id="tab-categories">
+        <div class="table-card">
+          <div class="table-header-box">
+            <h3 style="font-size: 1.1rem; font-weight: 700;">Mövcud Kateqoriyalar</h3>
+            <button class="btn-admin-primary" onclick="addNewCategoryPrompt()">➕ Kateqoriya Əlavə Et</button>
+          </div>
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>İkon</th>
+                <th>Adı (AZ)</th>
+                <th>Adı (EN)</th>
+                <th>Slug ID</th>
+                <th>Əməliyyat</th>
+              </tr>
+            </thead>
+            <tbody id="admin-categories-table">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           TAB 4: ORDERS
+           ================================================================== -->
+      <section class="tab-pane" id="tab-orders">
+        <div class="table-card">
+          <div class="table-header-box">
+            <h3 style="font-size: 1.1rem; font-weight: 700;">Daxil Olmuş Sifarişlər</h3>
+          </div>
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Sifariş ID</th>
+                <th>Müştəri / Tel</th>
+                <th>Ünvan</th>
+                <th>Məhsullar</th>
+                <th>Cəm</th>
+                <th>Status</th>
+                <th>Sil</th>
+              </tr>
+            </thead>
+            <tbody id="admin-orders-table">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           TAB 5: BANNERS
+           ================================================================== -->
+      <section class="tab-pane" id="tab-banners">
+        <div class="table-card" style="padding: 24px;">
+          <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 20px;">Ana Səhifə Hero Slider Bannerləri</h3>
+          <div id="admin-banners-list"></div>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           TAB 6: DISCOUNTS
+           ================================================================== -->
+      <section class="tab-pane" id="tab-discounts">
+        <div class="table-card" style="padding: 24px;">
+          <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 20px;">Endirim Promokodları</h3>
+          <div id="admin-discounts-list"></div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ==========================================================================
+       Add / Edit Product Modal
+       ========================================================================== -->
+  <div class="admin-modal-overlay" id="product-modal">
+    <div class="admin-modal">
+      <div class="admin-modal-head">
+        <h3 id="product-modal-title" style="font-size: 1.25rem; font-weight: 800;">Yeni Məhsul Əlavə Et</h3>
+        <button onclick="closeProductModal()" style="font-size: 1.5rem; color: var(--admin-muted); cursor: pointer;">&times;</button>
+      </div>
+      <form id="product-form" onsubmit="handleSaveProduct(event)">
+        <div class="admin-modal-body">
+          <div class="admin-form-group">
+            <label>Məhsulun Adı (AZ)*</label>
+            <input type="text" id="p-title-az" class="admin-form-control" required placeholder="məs. iPhone 15 Pro 128GB">
+          </div>
+
+          <div class="admin-form-group">
+            <label>Məhsulun Adı (EN)</label>
+            <input type="text" id="p-title-en" class="admin-form-control" placeholder="məs. iPhone 15 Pro 128GB">
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div class="admin-form-group">
+              <label>Kateqoriya*</label>
+              <select id="p-category" class="admin-form-control" required></select>
+            </div>
+            <div class="admin-form-group">
+              <label>Stok sayı</label>
+              <input type="number" id="p-stock" class="admin-form-control" value="15" min="0">
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;">
+            <div class="admin-form-group">
+              <label>Qiymət (AZN)*</label>
+              <input type="number" step="0.01" id="p-price" class="admin-form-control" required placeholder="1999">
+            </div>
+            <div class="admin-form-group">
+              <label>Köhnə Qiymət (AZN)</label>
+              <input type="number" step="0.01" id="p-old-price" class="admin-form-control" placeholder="2350">
+            </div>
+            <div class="admin-form-group">
+              <label>Endirim Faizi</label>
+              <input type="text" id="p-discount" class="admin-form-control" placeholder="-15%">
+            </div>
+          </div>
+
+          <div class="admin-form-group">
+            <label>Şəkil URL-i (WebP / PNG / JPG)*</label>
+            <input type="url" id="p-image" class="admin-form-control" required placeholder="https://images.unsplash.com/...">
+          </div>
+
+          <div class="admin-form-group">
+            <label>Məhsul haqqında qısa təsvir</label>
+            <textarea id="p-desc-az" class="admin-form-control" rows="3" placeholder="Məhsulun əsas texniki üstünlükləri..."></textarea>
+          </div>
+
+          <div class="admin-form-group" style="display: flex; align-items: center; gap: 10px;">
+            <input type="checkbox" id="p-bestseller" style="width: 18px; height: 18px; accent-color: var(--admin-primary);">
+            <label for="p-bestseller" style="margin-bottom: 0; cursor: pointer;">"Ən çox satılanlar" (Best Seller) bölməsində göstərilsin</label>
+          </div>
+        </div>
+
+        <div class="admin-modal-foot">
+          <button type="button" class="btn-admin-secondary" onclick="closeProductModal()">Ləğv et</button>
+          <button type="submit" class="btn-admin-primary">Yadda saxla</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/i18n.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Məhsul Detalları — TechStore</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .product-detail-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 48px;
+      padding: 40px 0 60px;
+    }
+    .product-gallery {
+      background: #FFFFFF;
+      border-radius: var(--radius-xl);
+      padding: 32px;
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .main-img-box {
+      width: 100%;
+      height: 380px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+    .main-img-box img {
+      max-height: 340px;
+      object-fit: contain;
+    }
+    .product-info-panel {
+      display: flex;
+      flex-direction: column;
+    }
+    .badge-stock {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      font-size: 0.8rem;
+      font-weight: 700;
+      background: #ECFDF5;
+      color: #059669;
+      width: fit-content;
+      margin-bottom: 12px;
+    }
+    .detail-title {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--dark);
+      line-height: 1.25;
+      margin-bottom: 12px;
+    }
+    .detail-price-box {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .detail-price {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+    .detail-old-price {
+      font-size: 1.3rem;
+      color: var(--text-light);
+      text-decoration: line-through;
+    }
+    .detail-desc {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+    .action-row {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 32px;
+    }
+    .qty-picker {
+      display: flex;
+      align-items: center;
+      background: #F1F5F9;
+      border-radius: var(--radius-pill);
+      padding: 6px 14px;
+      gap: 12px;
+    }
+    .qty-picker button {
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+    .qty-picker span {
+      font-size: 1.05rem;
+      font-weight: 700;
+      min-width: 20px;
+      text-align: center;
+    }
+    .specs-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+      background: #FFFFFF;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--border-light);
+    }
+    .specs-table td {
+      padding: 12px 18px;
+      border-bottom: 1px solid var(--border-light);
+      font-size: 0.92rem;
+    }
+    .specs-table tr:last-child td {
+      border-bottom: none;
+    }
+    .specs-table td:first-child {
+      font-weight: 700;
+      color: var(--dark);
+      width: 40%;
+      background: #F8FAFC;
+    }
+    @media (max-width: 992px) {
+      .product-detail-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <button class="mobile-menu-toggle" aria-label="Menyu"><span></span><span></span><span></span></button>
+      <a href="index.html" class="site-logo">
+        <div class="logo-icon-wrap">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-2z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+        </div>
+        <div class="logo-text">Tech<span>Store</span></div>
+      </a>
+      <nav class="main-nav">
+        <a href="index.html" class="nav-link" data-i18n="nav_home">Ana səhifə</a>
+        <a href="shop.html" class="nav-link active" data-i18n="nav_shop">Mağaza</a>
+        <a href="about.html" class="nav-link" data-i18n="nav_about">Haqqımızda</a>
+        <a href="contact.html" class="nav-link" data-i18n="nav_contact">Əlaqə</a>
+      </nav>
+      <div class="header-actions">
+        <div class="lang-toggle-wrap">
+          <button class="lang-btn active" data-lang="az">AZ</button>
+          <button class="lang-btn" data-lang="en">EN</button>
+        </div>
+        <a href="admin/index.html" class="action-icon-btn" title="Admin Panel">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </a>
+        <a href="cart.html" class="action-icon-btn open-cart-btn" aria-label="Səbət">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-2z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <span class="action-badge cart-count-badge">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Product Detail Content -->
+  <main class="container">
+    <div id="product-detail-container">
+      <!-- Injected via JavaScript -->
+    </div>
+
+    <!-- Related Products -->
+    <div class="section-wrap" style="border-top: 1px solid var(--border-light); margin-top: 32px;">
+      <h3 class="section-title" style="margin-bottom: 24px;" data-i18n="related_products">Oxşar məhsullar</h3>
+      <div class="products-grid" id="related-products-grid"></div>
+    </div>
+  </main>
+
+  <!-- Cart Drawer -->
+  <div class="cart-drawer-overlay" id="cart-drawer-overlay"></div>
+  <div class="cart-drawer" id="cart-drawer">
+    <div class="cart-drawer-head">
+      <h3 data-i18n="cart_title">Səbətiniz</h3>
+      <button class="close-drawer-btn">&times;</button>
+    </div>
+    <div class="cart-drawer-body" id="drawer-cart-list"></div>
+    <div class="cart-drawer-foot">
+      <div class="drawer-total-row">
+        <span data-i18n="cart_total">Cəmi:</span>
+        <span id="drawer-cart-total">0,00 ₼</span>
+      </div>
+      <a href="checkout.html" class="drawer-checkout-btn" data-i18n="cart_checkout">Sifarişi rəsmiləşdir</a>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    let currentQty = 1;
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const productId = urlParams.get("id") || 1;
+      renderProductDetail(productId);
+    });
+
+    function renderProductDetail(id) {
+      const product = window.dataStore.getProductById(id) || window.dataStore.getProducts()[0];
+      const lang = window.i18n.getLang();
+      const title = lang === "az" ? product.title_az : product.title_en;
+      const desc = lang === "az" ? product.description_az : product.description_en;
+
+      document.title = `${title} — TechStore`;
+
+      const container = document.getElementById("product-detail-container");
+      container.innerHTML = `
+        <div class="product-detail-layout">
+          <div class="product-gallery">
+            <div class="main-img-box">
+              <img id="detail-main-img" src="${product.image}" alt="${title}">
+            </div>
+          </div>
+
+          <div class="product-info-panel">
+            <span class="badge-stock">✓ ${window.i18n.t("product_in_stock")} (${product.stockCount || 15} ədəd)</span>
+            <h1 class="detail-title">${title}</h1>
+
+            <div class="product-rating" style="margin-bottom: 16px;">
+              <div class="stars-list">★★★★★</div>
+              <span class="reviews-num">(${product.reviewsCount} rəy)</span>
+            </div>
+
+            <div class="detail-price-box">
+              <span class="detail-price">${window.i18n.formatPrice(product.price)}</span>
+              ${product.oldPrice ? `<span class="detail-old-price">${window.i18n.formatPrice(product.oldPrice)}</span>` : ''}
+            </div>
+
+            <p class="detail-desc">${desc}</p>
+
+            <div class="action-row">
+              <div class="qty-picker">
+                <button onclick="changeQty(-1)">-</button>
+                <span id="detail-qty-val">1</span>
+                <button onclick="changeQty(1)">+</button>
+              </div>
+
+              <button class="btn-primary" style="flex: 1; justify-content: center;" onclick="addDetailToCart(${product.id})">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-2z"></path>
+                  <line x1="3" y1="6" x2="21" y2="6"></line>
+                  <path d="M16 10a4 4 0 0 1-8 0"></path>
+                </svg>
+                <span>${window.i18n.t("add_to_cart")}</span>
+              </button>
+
+              <button class="wishlist-btn" style="width: 48px; height: 48px;" onclick="handleWishlistToggle(event, ${product.id})">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="${window.dataStore.isInWishlist(product.id) ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+              </button>
+            </div>
+
+            <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 12px;" data-i18n="product_specs">Texniki göstəricilər</h3>
+            <table class="specs-table">
+              ${renderSpecs(product.specs)}
+            </table>
+          </div>
+        </div>
+      `;
+
+      renderRelated(product.category, product.id);
+    }
+
+    function renderSpecs(specs) {
+      if (!specs) return "<tr><td colspan='2'>Göstəricilər qeyd olunmayıb</td></tr>";
+      return Object.entries(specs).map(([key, val]) => `
+        <tr>
+          <td>${key}</td>
+          <td>${val}</td>
+        </tr>
+      `).join("");
+    }
+
+    function changeQty(diff) {
+      currentQty = Math.max(1, currentQty + diff);
+      document.getElementById("detail-qty-val").textContent = currentQty;
+    }
+
+    function addDetailToCart(id) {
+      window.dataStore.addToCart(id, currentQty);
+      showToast(window.i18n.t("added_to_cart"));
+    }
+
+    function renderRelated(category, currentId) {
+      const all = window.dataStore.getProducts();
+      const related = all.filter(p => p.id != currentId && p.category === category).slice(0, 4);
+      const grid = document.getElementById("related-products-grid");
+      const lang = window.i18n.getLang();
+
+      grid.innerHTML = (related.length ? related : all.slice(0, 4)).map(p => {
+        const title = lang === "az" ? p.title_az : p.title_en;
+        return `
+          <div class="product-card">
+            <div class="product-thumb-wrap" onclick="window.location.href='product.html?id=${p.id}'">
+              <img src="${p.image}" alt="${title}">
+            </div>
+            <div class="product-meta">
+              <h3 class="product-title" onclick="window.location.href='product.html?id=${p.id}'">${title}</h3>
+              <div class="product-price-box">
+                <span class="current-price">${window.i18n.formatPrice(p.price)}</span>
+              </div>
+              <button class="btn-add-cart" onclick="handleAddToCart(event, ${p.id})">
+                <span>${window.i18n.t('add_to_cart')}</span>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+  </script>
+</body>
+</html>

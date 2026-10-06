@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Haqqımızda — TechStore</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <button class="mobile-menu-toggle" aria-label="Menyu"><span></span><span></span><span></span></button>
+      <a href="index.html" class="site-logo">
+        <div class="logo-icon-wrap">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-2z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+        </div>
+        <div class="logo-text">Tech<span>Store</span></div>
+      </a>
+      <nav class="main-nav">
+        <a href="index.html" class="nav-link" data-i18n="nav_home">Ana səhifə</a>
+        <a href="shop.html" class="nav-link" data-i18n="nav_shop">Mağaza</a>
+        <a href="about.html" class="nav-link active" data-i18n="nav_about">Haqqımızda</a>
+        <a href="contact.html" class="nav-link" data-i18n="nav_contact">Əlaqə</a>
+      </nav>
+      <div class="header-actions">
+        <div class="lang-toggle-wrap">
+          <button class="lang-btn active" data-lang="az">AZ</button>
+          <button class="lang-btn" data-lang="en">EN</button>
+        </div>
+        <a href="admin/index.html" class="action-icon-btn" title="Admin Panel">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </a>
+        <a href="cart.html" class="action-icon-btn open-cart-btn" aria-label="Səbət">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-2z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <span class="action-badge cart-count-badge">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- About Content -->
+  <main class="container" style="padding: 60px 24px;">
+    <div style="max-width: 800px; margin: 0 auto; text-align: center; margin-bottom: 50px;">
+      <span class="section-label" style="display: inline-block;">BİZ KİMİK?</span>
+      <h1 class="hero-title" style="font-size: 2.8rem; margin-top: 10px;">
+        Texnologiyanı hər kəs üçün <span>əlçatan edirik</span>
+      </h1>
+      <p style="font-size: 1.15rem; color: var(--text-muted); line-height: 1.7;">
+        TechStore 2026-cı ildən etibarən Azərbaycan bazarında ən qabaqcıl smartfon, kompüter, audio və oyun cihazlarının rəsmi zəmanətli satışını həyata keçirən aparıcı onlayn platformadır.
+      </p>
+    </div>
+
+    <!-- Values Grid -->
+    <div class="products-grid" style="grid-template-columns: repeat(3, 1fr); margin-bottom: 60px;">
+      <div style="background: #FFFFFF; padding: 32px; border-radius: var(--radius-lg); border: 1px solid var(--border-light); text-align: center;">
+        <div style="font-size: 2.5rem; margin-bottom: 12px;">🎯</div>
+        <h3 style="font-size: 1.2rem; font-weight: 800; margin-bottom: 10px;">Missiyamız</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Müştərilərimizi ən son dünya texnologiyaları ilə sərfəli şərtlərlə və yüksək xidmət səviyyəsində təmin etmək.</p>
+      </div>
+
+      <div style="background: #FFFFFF; padding: 32px; border-radius: var(--radius-lg); border: 1px solid var(--border-light); text-align: center;">
+        <div style="font-size: 2.5rem; margin-bottom: 12px;">🛡️</div>
+        <h3 style="font-size: 1.2rem; font-weight: 800; margin-bottom: 10px;">Zəmanət və Güvən</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Bütün təqdim olunan cihazlar 100% orijinaldır və rəsmi istehsalçı zəmanəti ilə müşayiət olunur.</p>
+      </div>
+
+      <div style="background: #FFFFFF; padding: 32px; border-radius: var(--radius-lg); border: 1px solid var(--border-light); text-align: center;">
+        <div style="font-size: 2.5rem; margin-bottom: 12px;">⚡</div>
+        <h3 style="font-size: 1.2rem; font-weight: 800; margin-bottom: 10px;">Sürətli Xidmət</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Bakı daxilində eyni gün, regionlara isə 24-48 saat ərzində sürətli və təhlükəsiz çatdırılma.</p>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/data.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

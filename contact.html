@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Əlaqə — TechStore</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 40px;
+      padding: 40px 0 60px;
+    }
+    .contact-info-card, .contact-form-card {
+      background: #FFFFFF;
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-sm);
+    }
+    .contact-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .contact-icon-box {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--primary-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+    @media (max-width: 992px) {
+      .contact-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <button class="mobile-menu-toggle" aria-label="Menyu"><span></span><span></span><span></span></button>
+      <a href="index.html" class="site-logo">
+        <div class="logo-icon-wrap">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-2z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+        </div>
+        <div class="logo-text">Tech<span>Store</span></div>
+      </a>
+      <nav class="main-nav">
+        <a href="index.html" class="nav-link" data-i18n="nav_home">Ana səhifə</a>
+        <a href="shop.html" class="nav-link" data-i18n="nav_shop">Mağaza</a>
+        <a href="about.html" class="nav-link" data-i18n="nav_about">Haqqımızda</a>
+        <a href="contact.html" class="nav-link active" data-i18n="nav_contact">Əlaqə</a>
+      </nav>
+      <div class="header-actions">
+        <div class="lang-toggle-wrap">
+          <button class="lang-btn active" data-lang="az">AZ</button>
+          <button class="lang-btn" data-lang="en">EN</button>
+        </div>
+        <a href="admin/index.html" class="action-icon-btn" title="Admin Panel">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contact Content -->
+  <main class="container">
+    <div style="padding: 30px 0 0;">
+      <span class="section-label">BİZİMLƏ ƏLAQƏ</span>
+      <h1 class="section-title">Hər zaman sizə kömək etməyə hazırıq</h1>
+    </div>
+
+    <div class="contact-layout">
+      <!-- Info Card -->
+      <div class="contact-info-card">
+        <h3 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 24px;">Əlaqə vasitələri</h3>
+
+        <div class="contact-row">
+          <div class="contact-icon-box">📍</div>
+          <div>
+            <h4 style="font-weight: 700; margin-bottom: 4px;">Ünvan</h4>
+            <p style="color: var(--text-muted); font-size: 0.95rem;">Bakı şəhəri, Nizami küçəsi 142, AZ1010</p>
+          </div>
+        </div>
+
+        <div class="contact-row">
+          <div class="contact-icon-box">📞</div>
+          <div>
+            <h4 style="font-weight: 700; margin-bottom: 4px;">Telefon / WhatsApp</h4>
+            <p style="color: var(--text-muted); font-size: 0.95rem;">+994 (12) 555-44-33<br>+994 (50) 888-99-00</p>
+          </div>
+        </div>
+
+        <div class="contact-row">
+          <div class="contact-icon-box">✉️</div>
+          <div>
+            <h4 style="font-weight: 700; margin-bottom: 4px;">E-poçt</h4>
+            <p style="color: var(--text-muted); font-size: 0.95rem;">destek@techstore.az<br>sales@techstore.az</p>
+          </div>
+        </div>
+
+        <div class="contact-row">
+          <div class="contact-icon-box">⏰</div>
+          <div>
+            <h4 style="font-weight: 700; margin-bottom: 4px;">İş saatları</h4>
+            <p style="color: var(--text-muted); font-size: 0.95rem;">Bazar ertəsi - Şənbə: 10:00 - 20:00<br>Bazar: 11:00 - 18:00</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form Card -->
+      <div class="contact-form-card">
+        <h3 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 24px;">Bizə mesaj yazın</h3>
+        <form onsubmit="event.preventDefault(); showToast('Mesajınız uğurla göndərildi! Tezliklə cavablandırılacaq.'); this.reset();">
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            <div>
+              <label style="display: block; font-weight: 700; font-size: 0.88rem; margin-bottom: 6px;">Ad və Soyad</label>
+              <input type="text" required style="width: 100%; padding: 12px 16px; border: 1px solid var(--border-color); border-radius: 8px;">
+            </div>
+            <div>
+              <label style="display: block; font-weight: 700; font-size: 0.88rem; margin-bottom: 6px;">E-poçt və ya Telefon</label>
+              <input type="text" required style="width: 100%; padding: 12px 16px; border: 1px solid var(--border-color); border-radius: 8px;">
+            </div>
+            <div>
+              <label style="display: block; font-weight: 700; font-size: 0.88rem; margin-bottom: 6px;">Mövzu</label>
+              <input type="text" required style="width: 100%; padding: 12px 16px; border: 1px solid var(--border-color); border-radius: 8px;">
+            </div>
+            <div>
+              <label style="display: block; font-weight: 700; font-size: 0.88rem; margin-bottom: 6px;">Mesajınız</label>
+              <textarea rows="4" required style="width: 100%; padding: 12px 16px; border: 1px solid var(--border-color); border-radius: 8px;"></textarea>
+            </div>
+            <button type="submit" class="btn-primary" style="justify-content: center; padding: 14px;">
+              Mesajı göndər
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/data.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
